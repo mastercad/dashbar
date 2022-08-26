@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="add_icon.png">addIcon.png</file>
+        <file alias="default_icon.png">default_icon.png</file>
+    </qresource>
+    <qresource prefix="/ini">
+        <file alias="settings.ini">settings.ini</file>
+    </qresource>
+</RCC>
