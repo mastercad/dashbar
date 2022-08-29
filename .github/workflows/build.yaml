@@ -142,7 +142,7 @@ jobs:
         file(MAKE_DIRECTORY qtcreator)
 
         foreach(package qtcreator qtcreator_dev)
-          echo "Download ${qtc_base_url}/installer_source/${qtc_platform}/${package}.7z"
+          message("::Download ${qtc_base_url}/installer_source/${qtc_platform}/${package}.7z")
           file(DOWNLOAD
             "${qtc_base_url}/installer_source/${qtc_platform}/${package}.7z" ./${package}.7z SHOW_PROGRESS)
           execute_process(COMMAND
