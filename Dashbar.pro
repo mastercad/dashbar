@@ -23,7 +23,6 @@ HEADERS += appButton.h \
            fileDialog.h \
            flowlayout.h \
            gridlayout.h \
-           isetting.h \
            mainwindow.h \
            mapper.h
 FORMS += mainwindow.ui

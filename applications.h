@@ -1,13 +1,12 @@
 #ifndef __APPLICATIONS_H__
 #define __APPLICATIONS_H__
 
-#include "isetting.h"
 #include "application.h"
 
 #include <QString>
 #include <QHash>
 
-class Applications : public ISetting
+class Applications
 {
     public:
         Applications();

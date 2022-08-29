@@ -1,7 +1,6 @@
 #ifndef __MAPPER_H__
 #define __MAPPER_H__
 
-#include "isetting.h"
 #include "config.h"
 #include "applications.h"
 

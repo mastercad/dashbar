@@ -1,12 +1,10 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-#include "isetting.h"
-
 #include <QHash>
 #include <QString>
 
-class Config : public ISetting
+class Config
 {
     public:
         Config();

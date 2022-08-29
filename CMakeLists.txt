@@ -36,8 +36,7 @@ set(PROJECT_SOURCES
 	fileDialog.cpp
 	fileDialog.h
 	flowlayout.cpp
-	flowlayout.h
-	isetting.h
+        flowlayout.h
 	mapper.cpp
 	mapper.h
         gridlayout.h
