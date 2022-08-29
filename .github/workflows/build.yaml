@@ -3,7 +3,7 @@ name: QMake Build Matrix
 on: [push]
 
 env:
-  QT_VERSION: 6.4.1
+  QT_VERSION: 6.3.1
   QT_CREATOR_VERSION: 8.0.1
   PLUGIN_PRO: Dashbar.pro
   PLUGIN_NAME: Dashbar
