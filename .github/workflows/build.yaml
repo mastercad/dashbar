@@ -5,7 +5,7 @@ on: [push]
 env:
   QT_VERSION: 5.14.0
   QT_CREATOR_VERSION: 4.11.0
-  PLUGIN_PRO: dashbar.pro
+  PLUGIN_PRO: Dashbar.pro
   PLUGIN_NAME: Dashbar
 
 jobs:
