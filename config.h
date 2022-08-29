@@ -8,7 +8,7 @@ class Config
 {
     public:
         Config();
-        virtual QString getIdentifier() {
+        QString getIdentifier() {
             return "config";
         }
         QHash<QString, QString>* getKeys();

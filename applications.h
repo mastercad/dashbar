@@ -10,7 +10,7 @@ class Applications
 {
     public:
         Applications();
-        virtual QString getIdentifier() {
+        QString getIdentifier() {
             return "applications";
         }
         Applications* add(Application* application);

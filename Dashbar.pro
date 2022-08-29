@@ -3,6 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
+QT += core gui widgets
 TARGET = Dashbar
 INCLUDEPATH += .
 
@@ -37,7 +38,6 @@ SOURCES += appButton.cpp \
            gridlayout.cpp \
            main.cpp \
            mainwindow.cpp \
-           mapper.cpp \
-           CMakeFiles/3.22.1/CompilerIdCXX/CMakeCXXCompilerId.cpp
+           mapper.cpp
 RESOURCES += resources.qrc
 TRANSLATIONS += Dashbar_en_GB.ts
