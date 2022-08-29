@@ -69,6 +69,7 @@ void ButtonManager::startApplication(QString applicationIdentifier) {
     process->start(command.trimmed(), parameters.split(" "));
 
     connect(process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processIsFinished(int,QProcess::ExitStatus)));
+    connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(errorOccurred(QProcess::ProcessError)));
 
     QPushButton* button = buttons->value(application->getPath());
 
@@ -77,10 +78,35 @@ void ButtonManager::startApplication(QString applicationIdentifier) {
     processes->insert(application->getPath(), process);
 }
 
+void ButtonManager::errorOccurred(QProcess::ProcessError error) {
+    QProcess* process = static_cast<QProcess*>(this->sender());
+    QString errorOutput = process->readAllStandardError();
+
+    if (!errorOutput.isEmpty()) {
+        QMessageBox::critical(parent, tr("Error"), errorOutput);
+    } else if (QProcess::FailedToStart == error){
+        QMessageBox::critical(parent, tr("Failed to start"), tr("The process failed to start. Either the invoked program is missing, or you may have insufficient permissions or resources to invoke the program."));
+    } else if (QProcess::Crashed == error) {
+        QMessageBox::critical(parent, tr("Crashed"), tr("The process crashed some time after starting successfully."));
+    } else if (QProcess::Timedout == error) {
+        QMessageBox::critical(parent, tr("Timedout"), tr("Timeout reached."));
+    } else if (QProcess::WriteError == error) {
+        QMessageBox::critical(parent, tr("WriteError"), tr("An error occurred when attempting to write to the process. For example, the process may not be running, or it may have closed its input channel."));
+    } else if (QProcess::ReadError == error) {
+        QMessageBox::critical(parent, tr("ReadError"), tr("An error occurred when attempting to read from the process. For example, the process may not be running."));
+    } else {
+        QMessageBox::critical(parent, tr("Unknown error"), tr("An unknown error occurred."));
+    }
+
+    Application* application = applications->get(process->property("applicationIdentifier").toString());
+    QPushButton* button = buttons->value(application->getPath());
+    button->setDisabled(false);
+}
+
 void ButtonManager::processIsFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     QProcess* process = static_cast<QProcess*>(this->sender());
 
-    qDebug() << "ButtonManager::processIsFinished ExitCode: " << exitCode << " Exitstatus: " << exitStatus;
+    qDebug() << "ExitCode: " << exitCode << " Exitstatus: " << exitStatus;
 
     Application* application = applications->get(process->property("applicationIdentifier").toString());
     QPushButton* button = buttons->value(application->getPath());

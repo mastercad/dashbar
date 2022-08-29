@@ -22,6 +22,7 @@ class ButtonManager: public QWidget
     public slots:
         void startApplication(QString applicationIdentifier);
         void processIsFinished(int exitCode, QProcess::ExitStatus exitStatus);
+        void errorOccurred(QProcess::ProcessError error);
         
     private:
         QWidget* parent;
