@@ -15,24 +15,24 @@ jobs:
     strategy:
       matrix:
         config:
-        - {
-            name: "Windows Latest x64", artifact: "Windows-x64.zip",
-            os: windows-latest,
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows Latest x86", artifact: "Windows-x86.zip",
-            os: windows-latest,
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars32.bat"
-          }
+#        - {
+#            name: "Windows Latest x64", artifact: "Windows-x64.zip",
+#            os: windows-latest,
+#            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+#          }
+#        - {
+#            name: "Windows Latest x86", artifact: "Windows-x86.zip",
+#            os: windows-latest,
+#            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars32.bat"
+#          }
         - {
             name: "Linux Latest x64", artifact: "Linux-x64.zip",
             os: ubuntu-latest
           }
-        - {
-            name: "macOS Latest x64", artifact: "macOS-x64.zip",
-            os: macos-latest
-          }
+#        - {
+#            name: "macOS Latest x64", artifact: "macOS-x64.zip",
+#            os: macos-latest
+#          }
 
     steps:
     - uses: actions/checkout@v1
@@ -158,9 +158,14 @@ jobs:
           )
         endif()
 
-        execute_process(env)
-        execute_process(ls -lisa)
-        execute_process(ls -lisa qtcreator/lib/Qt/lib)
+    - name: ENV
+      run: env
+
+    - name: ls -lisa
+      run: ls -lisa
+
+    - name: ls -lisa qtcreator/lib/Qt/lib
+      run: ls -lisa qtcreator/lib/Qt/lib
 
     - name: Configure
       shell: cmake -P {0}
