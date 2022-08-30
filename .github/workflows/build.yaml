@@ -158,6 +158,10 @@ jobs:
           )
         endif()
 
+        execute_process(env)
+        execute_process(ls -lisa)
+        execute_process(ls -lisa qtcreator/lib/Qt/lib)
+
     - name: Configure
       shell: cmake -P {0}
       run: |
@@ -194,11 +198,6 @@ jobs:
     - name: Build
       shell: cmake -P {0}
       run: |
-
-        execute_process(env)
-        execute_process(ls -lisa)
-        execute_process(ls -lisa qtcreator/lib/Qt/lib)
-
         if ("${{ runner.os }}" STREQUAL "Windows")
           set(ENV{PATH} "${{ steps.qt.outputs.qt_dir }}/bin/;$ENV{PATH}")
         else()
