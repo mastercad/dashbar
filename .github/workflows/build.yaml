@@ -164,6 +164,9 @@ jobs:
     - name: set PATH
       run: echo "PATH=qt6/${QT_VERSION}/gcc_64/bin/:$PATH" >> $GITHUB_ENV
 
+    - name: set CMAKE_PREFIX_PATH
+      run: echo "CMAKE_PREFIX_PATH=qt6/${QT_VERSION}/gcc_64" >> $GITHUB_ENV
+
     - name: output qmake path
       run: which qmake
 
