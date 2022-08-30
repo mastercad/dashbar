@@ -233,7 +233,7 @@ jobs:
         file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/qtcreator" qtcreator_dir)
 
         execute_process(
-          COMMAND ${{ steps.qt.outputs.qt_dir }}/bin/qmake
+          COMMAND qmake
             $ENV{PLUGIN_PRO}
             CONFIG+=release
             QTC_SOURCE="${qtcreator_dir}"
