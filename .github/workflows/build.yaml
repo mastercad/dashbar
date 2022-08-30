@@ -195,6 +195,8 @@ jobs:
       run: ls -lisa qt6
 
     - name: Configure
+      env:
+        CMAKE_PREFIX_PATH: qt6
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
