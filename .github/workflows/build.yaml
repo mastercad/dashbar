@@ -177,7 +177,7 @@ jobs:
       run: qmake --version
 
     - name: output qt qmake version
-      run: ${{ steps.qt.outputs.qt_dir }}/bin/qmake --version
+      run: ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/bin/qmake --version
 
     - name: ENV
       run: env
