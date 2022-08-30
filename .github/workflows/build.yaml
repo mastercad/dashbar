@@ -185,20 +185,20 @@ jobs:
     - name: ls -lisa
       run: ls -lisa
 
-    - name: ls -lisa qtcreator
-      run: ls -lisa qtcreator
+    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator
+      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator
 
-    - name: ls -lisa qtcreator/lib
-      run: ls -lisa qtcreator/lib
+    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib
+      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib
 
-    - name: ls -lisa qtcreator/lib/Qt
-      run: ls -lisa qtcreator/lib/Qt
+    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt
+      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt
 
-    - name: ls -lisa qtcreator/lib/Qt/lib
-      run: ls -lisa qtcreator/lib/Qt/lib
+    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib
+      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib
 
-    - name: ls -lisa qt6
-      run: ls -lisa qt6
+    - name: ls -lisa ${GITHUB_WORKSPACE}/qt6
+      run: ls -lisa ${GITHUB_WORKSPACE}/qt6
 
     - name: Configure
       env:
