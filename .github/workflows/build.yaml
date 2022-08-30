@@ -194,6 +194,11 @@ jobs:
     - name: Build
       shell: cmake -P {0}
       run: |
+
+        execute_process(env)
+        execute_process(ls -lisa)
+        execute_process(ls -lisa qtcreator/lib/Qt/lib)
+
         if ("${{ runner.os }}" STREQUAL "Windows")
           set(ENV{PATH} "${{ steps.qt.outputs.qt_dir }}/bin/;$ENV{PATH}")
         else()
@@ -223,10 +228,6 @@ jobs:
           ${CMAKE_COMMAND} -E tar cvf ${artifact} --format=zip "${{ steps.qt_creator.outputs.qtc_binary_name }}"
           WORKING_DIRECTORY "${{ steps.qt_creator.outputs.qtc_output_directory }}"
         )
-
-        execute_process(env)
-        execute_process(ls -lisa)
-        execute_process(ls -lisa qtcreator/lib/Qt/lib)
 
     - uses: actions/upload-artifact@v1
       id: upload_artifact
