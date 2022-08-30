@@ -23,7 +23,6 @@ HEADERS += appButton.h \
            config.h \
            fileDialog.h \
            flowlayout.h \
-           gridlayout.h \
            mainwindow.h \
            mapper.h
 FORMS += mainwindow.ui
@@ -35,7 +34,6 @@ SOURCES += appButton.cpp \
            config.cpp \
            fileDialog.cpp \
            flowlayout.cpp \
-           gridlayout.cpp \
            main.cpp \
            mainwindow.cpp \
            mapper.cpp
