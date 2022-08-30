@@ -161,6 +161,9 @@ jobs:
     - name: output GITHUB_WORKSPACE
       run: echo ${GITHUB_WORKSPACE}
 
+    - name: output lib dir
+      run: ls -lisa "${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib"
+
     - name: set LD_LIBRARY_PATH
       run: echo "LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
