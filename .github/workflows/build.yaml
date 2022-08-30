@@ -161,6 +161,9 @@ jobs:
     - name: set LD_LIBRARY_PATH
       run: echo "LD_LIBRARY_PATH=qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
+    - name: set PATH
+      run: echo "PATH=/opt/Qt/6.3.1/gcc_64/bin/:$PATH" >> $GITHUB_ENV
+
     - name: ENV
       run: env
 
