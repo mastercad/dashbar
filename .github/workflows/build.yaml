@@ -158,9 +158,9 @@ jobs:
           )
         endif()
 
-        if (NOT "${{ runner.os }}" STREQUAL "Windows")
+#        if (NOT "${{ runner.os }}" STREQUAL "Windows")
           set(ENV{LD_LIBRARY_PATH} "qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}")
-        endif()
+#        endif()
 
     - name: ENV
       run: env
