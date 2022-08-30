@@ -158,6 +158,10 @@ jobs:
           )
         endif()
 
+        if ("${{ runner.os }}" NOT STREQUAL "Windows")
+          set(ENV{LD_LIBRARY_PATH} "qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}")
+        endif()
+
     - name: ENV
       run: env
 
@@ -183,7 +187,6 @@ jobs:
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
-          set(ENV{LD_LIBRARY_PATH} "qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}")
           execute_process(
             COMMAND "${{ matrix.config.environment_script }}" && set
             OUTPUT_FILE environment_script_output.txt
