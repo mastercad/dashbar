@@ -158,10 +158,13 @@ jobs:
           )
         endif()
 
-        LD_LIBRARY_PATH="qtcreator/lib/Qt/lib:$LD_LIBRARY_PATH"
+        set(ENV{LD_LIBRARY_PATH} "qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}")
 
     - name: ENV
       run: env
+
+    - name: Output GITHUB_ENV
+      run: echo $GITHUB_ENV
 
     - name: ls -lisa
       run: ls -lisa
