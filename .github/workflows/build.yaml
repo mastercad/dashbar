@@ -158,6 +158,9 @@ jobs:
           )
         endif()
 
+    - name: output WORKING_DIRECTORY
+      run: echo ${WORKING_DIRECTORY}
+
     - name: set LD_LIBRARY_PATH
       run: echo "LD_LIBRARY_PATH=${WORKING_DIRECTORY}/qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
