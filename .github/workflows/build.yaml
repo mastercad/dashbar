@@ -162,7 +162,7 @@ jobs:
       run: echo ${GITHUB_WORKSPACE}
 
     - name: set LD_LIBRARY_PATH
-      run: echo "LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
+      run: echo "LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib/:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
     - name: set PATH
       run: echo "PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/bin/:$PATH" >> $GITHUB_ENV
@@ -197,8 +197,8 @@ jobs:
     - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt
       run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt
 
-    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib
-      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib
+    - name: ls -lisa ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib
+      run: ls -lisa ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib
 
     - name: ls -lisa ${GITHUB_WORKSPACE}/qt6
       run: ls -lisa ${GITHUB_WORKSPACE}/qt6
