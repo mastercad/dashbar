@@ -173,6 +173,9 @@ jobs:
     - name: output qmake path
       run: which qmake
 
+    - name: output qmake version
+      run: qmake --version
+
     - name: ENV
       run: env
 
