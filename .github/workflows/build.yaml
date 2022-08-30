@@ -176,6 +176,9 @@ jobs:
     - name: output qmake version
       run: qmake --version
 
+    - name: output qt qmake version
+      run: ${{ steps.qt.outputs.qt_dir }}/bin/qmake --version
+
     - name: ENV
       run: env
 
