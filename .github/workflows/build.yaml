@@ -158,9 +158,8 @@ jobs:
           )
         endif()
 
-        set(ENV{LD_LIBRARY_PATH} "qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}")
-
-        echo "LD_LIBRARY_PATH=qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
+    - name: set LD_LIBRARY_PATH
+      run: echo "LD_LIBRARY_PATH=qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
     - name: ENV
       run: env
