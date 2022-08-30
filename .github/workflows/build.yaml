@@ -158,17 +158,17 @@ jobs:
           )
         endif()
 
-    - name: output WORKING_DIRECTORY
-      run: echo ${WORKING_DIRECTORY}
+    - name: output GITHUB_WORKSPACE
+      run: echo ${GITHUB_WORKSPACE}
 
     - name: set LD_LIBRARY_PATH
-      run: echo "LD_LIBRARY_PATH=${WORKING_DIRECTORY}/qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
+      run: echo "LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
     - name: set PATH
-      run: echo "PATH=${WORKING_DIRECTORY}/qt6/${QT_VERSION}/gcc_64/bin/:$PATH" >> $GITHUB_ENV
+      run: echo "PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/bin/:$PATH" >> $GITHUB_ENV
 
     - name: set CMAKE_PREFIX_PATH
-      run: echo "CMAKE_PREFIX_PATH=${WORKING_DIRECTORY}/qt6/${QT_VERSION}/gcc_64" >> $GITHUB_ENV
+      run: echo "CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64" >> $GITHUB_ENV
 
     - name: output qmake path
       run: which qmake
@@ -199,7 +199,7 @@ jobs:
 
     - name: Configure
       env:
-        CMAKE_PREFIX_PATH: ${WORKING_DIRECTORY}/qt6/
+        CMAKE_PREFIX_PATH: ${GITHUB_WORKSPACE}/qt6/
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
