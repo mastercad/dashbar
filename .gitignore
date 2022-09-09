@@ -28,14 +28,13 @@ CMakeFiles*
 CMakeCache*
 CMakeLists.txt.user
 moc_predefs.h
-Dashbar*
 .qt
 resources.qrc.depends
 cmake_install.cmake
 *.prl
 *.app
 moc_*.cpp
-ui_*.h
+# ui_*.h
 qrc_*.cpp
 Thumbs.db
 *.res
