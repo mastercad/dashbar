@@ -35,10 +35,8 @@ QPushButton* ButtonManager::generate(Application* application) {
 
     // prevent add "+" button also in this collection because this button behaves completely different
     if (!application->getPath().isEmpty()) {
-        this->buttons->insert(application->getPath(), button);
-
         connect(button, SIGNAL(clicked()), this->signalMapper, SLOT(map()));
-
+        this->buttons->insert(application->getPath(), button);
         this->signalMapper->setMapping(button, application->getPath());
     }
 

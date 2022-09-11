@@ -19,7 +19,7 @@ public:
 signals:
 
 private:
-    Applications* generateApplications(QString path = "");
+    Applications* generateFakeApplicationCollection(uint applicationCount);
 };
 
 #endif // TESTBUTTONMANAGER_H

@@ -27,9 +27,13 @@ class ButtonManager: public QWidget
     private:
         QWidget* parent;
         Applications* applications;
+        QHash<QString, QProcess*>* processes;
+
+    // this member are only protected to make inheritance for testing possible
+    protected:
         QSignalMapper* signalMapper;
         QHash<QString, QPushButton*>* buttons;
-        QHash<QString, QProcess*>* processes;
+
 };
 
 #endif
