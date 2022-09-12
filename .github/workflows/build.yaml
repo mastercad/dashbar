@@ -235,6 +235,9 @@ jobs:
           WORKING_DIRECTORY "${{ steps.qt_creator.outputs.qtc_output_directory }}"
         )
         
+    - name: output workspace build dir
+      run: ls -lisa ${GITHUB_WORKSPACE}/build
+
     - name: Run Tests
       shell: cmake -P {0}
       run: | 
