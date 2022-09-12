@@ -158,12 +158,6 @@ jobs:
           )
         endif()
 
-    - name: output GITHUB_WORKSPACE
-      run: echo ${GITHUB_WORKSPACE}
-
-    - name: output lib dir
-      run: ls -lisa "${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib"
-
     - name: set LD_LIBRARY_PATH
       run: echo "LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib:${GITHUB_WORKSPACE}/qtcreator/lib/Qt/lib:${LD_LIBRARY_PATH}" >> $GITHUB_ENV
 
@@ -172,45 +166,6 @@ jobs:
 
     - name: set CMAKE_PREFIX_PATH
       run: echo "CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64" >> $GITHUB_ENV
-
-    - name: output which -a qmake
-      run: which -a qmake
-
-    - name: output qmake version
-      run: qmake --version
-
-    - name: ouput qmake -query
-      run: qmake -query
-
-    - name: output qt qmake version
-      run: ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/bin/qmake --version
-
-    - name: output qt qmake query
-      run: ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/bin/qmake -query
-
-    - name: ENV
-      run: env
-
-    - name: Output GITHUB_ENV
-      run: echo $GITHUB_ENV
-
-    - name: ls -lisa
-      run: ls -lisa
-
-    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator
-      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator
-
-    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib
-      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib
-
-    - name: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt
-      run: ls -lisa ${GITHUB_WORKSPACE}/qtcreator/lib/Qt
-
-    - name: ls -lisa ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib
-      run: ls -lisa ${GITHUB_WORKSPACE}/qt6/${QT_VERSION}/gcc_64/lib
-
-    - name: ls -lisa ${GITHUB_WORKSPACE}/qt6
-      run: ls -lisa ${GITHUB_WORKSPACE}/qt6
 
     - name: Configure
       env:
@@ -251,7 +206,7 @@ jobs:
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
-          set(ENV{PATH} "${{ steps.qt.outputs.qt_dir }}/bin/;$ENV{PATH}")
+          set(ENV{PATH} "${{ steps.qt.outputs.qt_dir }}/bin/:$ENV{PATH}")
         else()
           set(ENV{PATH} "${{ steps.qt.outputs.qt_dir }}/bin/:$ENV{PATH}")
           set(ENV{LD_LIBRARY_PATH} "qtcreator/lib/Qt/lib:$ENV{LD_LIBRARY_PATH}")
@@ -279,6 +234,18 @@ jobs:
           ${CMAKE_COMMAND} -E tar cvf ${artifact} --format=zip "${{ steps.qt_creator.outputs.qtc_binary_name }}"
           WORKING_DIRECTORY "${{ steps.qt_creator.outputs.qtc_output_directory }}"
         )
+        
+    - name: Run Tests
+      shell: cmake -P {0}
+      run: | 
+      	execute_process(
+      	    COMMAND ${GITHUB_WORKSPACE}/build/${PLUGIN_NAME}Test 
+      	    RESULT_VARIABLE result
+	)
+	
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Bad exit status")
+        endif()
 
     - uses: actions/upload-artifact@v1
       id: upload_artifact
