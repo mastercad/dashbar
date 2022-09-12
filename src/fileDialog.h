@@ -18,7 +18,7 @@ class FileDialog: public QDialog
         FileDialog(Application* application, Applications* applications, QWidget* parent);
         QString convertToRelativePath(QString& path);
 
-    public slots:
+    public Q_SLOTS:
         void onSelectFileClicked();
         void onSelectIconClicked();
         void onCancelClicked();

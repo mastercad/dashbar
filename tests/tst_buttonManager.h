@@ -9,7 +9,7 @@ class TestButtonManager : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void generate();
     void generate_data();
 

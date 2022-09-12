@@ -17,6 +17,7 @@ HEADERS += ../src/application.h \
     ../src/mainwindow.h \
     ../src/mapper.h \
     ../src/windowPositionManager.h \
+    tst_applications.h \
     tst_buttonManager.h \
     tst_windowPositionManager.h
 
@@ -30,6 +31,7 @@ SOURCES += ../src/application.cpp \
     ../src/mainwindow.cpp \
     ../src/mapper.cpp \
     ../src/windowPositionManager.cpp \
+    tst_applications.cpp \
     tst_buttonManager.cpp \
     tst_main.cpp \
     tst_windowPositionManager.cpp

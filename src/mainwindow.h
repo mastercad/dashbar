@@ -60,7 +60,7 @@ public:
 protected:
     void closeEvent(QCloseEvent *event) override;
 
-public slots:
+public Q_SLOTS:
     void showContextMenu(const QPoint &pos);
     void removeApplication();
     void showFileSelect();

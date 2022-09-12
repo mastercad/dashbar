@@ -19,7 +19,7 @@ class ButtonManager: public QWidget
         ~ButtonManager();
         QPushButton* generate(Application* application);
     
-    public slots:
+    public Q_SLOTS:
         void startApplication(QString applicationIdentifier);
         void processIsFinished(int exitCode, QProcess::ExitStatus exitStatus);
         void errorOccurred(QProcess::ProcessError error);
