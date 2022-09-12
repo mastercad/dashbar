@@ -242,7 +242,7 @@ jobs:
       shell: cmake -P {0}
       run: | 
           execute_process(
-               COMMAND ${GITHUB_WORKSPACE}/build/${PLUGIN_NAME}Test 
+               COMMAND ${GITHUB_WORKSPACE}/build/${PLUGIN_NAME}Tests 
                RESULT_VARIABLE result
           )
 
