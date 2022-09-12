@@ -236,7 +236,10 @@ jobs:
         )
         
     - name: output workspace build dir
-      run: ls -lisa ${GITHUB_WORKSPACE}/build
+      run: ls -lisa ${GITHUB_WORKSPACE}/build/${PLUGIN_NAME}Tests 
+
+    - name: run tests
+      run: ${GITHUB_WORKSPACE}/build/${PLUGIN_NAME}Tests 
 
     - name: Run Tests
       shell: cmake -P {0}
