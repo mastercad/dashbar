@@ -6,6 +6,8 @@
 #include <QString>
 #include <QHash>
 
+#include <QMetaType>
+
 class Applications
 {
     public:
@@ -21,5 +23,7 @@ class Applications
     private:
         QHash<QString, Application*>* data;
 };
+
+Q_DECLARE_METATYPE(Applications*);
 
 #endif
