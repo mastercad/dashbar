@@ -4,7 +4,7 @@
 #include "application.h"
 
 #include <QString>
-#include <QHash>
+#include <QMap>
 
 #include <QMetaType>
 
@@ -17,11 +17,11 @@ class Applications
         }
         Applications* add(Application* application);
         Application* get(const QString applicationName);
-        QHash<QString, Application*>* getData() const {return data;}
+        QMap<QString, Application*>* getData() const {return data;}
         void remove(const QString identifier);
     
     private:
-        QHash<QString, Application*>* data;
+        QMap<QString, Application*>* data;
 };
 
 Q_DECLARE_METATYPE(Applications*);

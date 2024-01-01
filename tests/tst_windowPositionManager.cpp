@@ -51,7 +51,7 @@ Applications* TestWindowPositionManager::generateFakeApplicationCollection(uint 
 
     for (uint current = 0; current < applicationCount; ++current) {
         Application* application = new Application();
-        application->setPath(&"/Fake/Path/"[current]);
+        application->setLinuxPath(&"/Fake/Path/"[current]);
         applications->add(application);
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 12.0.1, 2023-12-31T08:22:21. -->
+<!-- Written by QtCreator 12.0.1, 2023-12-31T20:08:36. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -70,7 +70,28 @@
     <value type="bool" key="AutoTest.Framework.QtTest">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="AutoTest.CheckStates">
-    <value type="Qt::CheckState" key="1@:Qt Test">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_applications.h:TestApplications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_applications.h:add">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_applications.h:get">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_applications.h:remove">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_buttonManager.cpp:add application with path">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_buttonManager.cpp:add application without path">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_buttonManager.cpp:generate_data">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_buttonManager.h:TestButtonManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_buttonManager.h:generate">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:one big screen">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:one big screen with 3 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:one big screen with 30 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:resize_data">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:single screen resolution">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:single screen resolution with 3 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:single screen resolution with 30 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:two screens with different size, second is primary, with 30 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:two screens, second is primary, resolutions">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:two screens, second is primary, resolutions with 3 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.cpp:two screens, second is primary, with 30 applications">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.h:TestWindowPositionManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/media/Austausch/Projekte/Qt/Dashbar/tests/tst_windowPositionManager.h:resize">Unchecked</value>
    </valuemap>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>

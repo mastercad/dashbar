@@ -4,7 +4,7 @@
 #include "applicationRules.h"
 
 #include <QString>
-#include <QHash>
+#include <QMap>
 
 #include <QMetaType>
 
@@ -12,30 +12,54 @@ class Application
 {
     public:
         Application();
-        
-        QString getPath() const;
-        Application* setPath(const QString path);
-        
-        QString getName() const;
-        Application* setName(const QString name);
-        
-        QString getIcon() const;
-        Application* setIcon(const QString icon);
-        
-        QString getCommand() const;
-        Application* setCommand(const QString command);
-        
-        QString getParameters() const;
-        Application* setParameters(const QString parameters);
-        
+
         QString get(QString key) const;
         Application* set(const QString key, const QString value);
+
+        QString getName() const;
+        Application* setName(const QString name);
+
+        QString getIcon() const;
+        Application* setIcon(const QString icon);
+
+        QString getLinuxPath() const;
+        Application* setLinuxPath(const QString path);
+
+        QString getWindowsPath() const;
+        Application* setWindowsPath(const QString path);
+
+        QString getMacOSPath() const;
+        Application* setMacOSPath(const QString path);
+
+        QString retrievePath(const QString kernelType) const;
+
+        QString getLinuxCommand() const;
+        Application* setLinuxCommand(const QString command);
+
+        QString getWindowsCommand() const;
+        Application* setWindowsCommand(const QString command);
+
+        QString getMacOSCommand() const;
+        Application* setMacOSCommand(const QString command);
+
+        QString retrieveCommand(const QString kernelType) const;
+
+        QString getLinuxParameters() const;
+        Application* setLinuxParameters(const QString parameters);
+
+        QString getWindowsParameters() const;
+        Application* setWindowsParameters(const QString parameters);
+
+        QString getMacOSParameters() const;
+        Application* setMacOSParameters(const QString parameters);
+
+        QString retrieveParameters(const QString kernelType) const;
         
-        QHash<QString, ApplicationRules*>* getKeys();
+        QMap<QString, ApplicationRules*>* getKeys();
         
     private:
-        QHash<QString, ApplicationRules*>* keys;
-        QHash<QString, QString>* data;
+        QMap<QString, ApplicationRules*>* keys;
+        QMap<QString, QString>* data;
 };
 
 Q_DECLARE_METATYPE(Application*);

@@ -54,7 +54,6 @@ public:
     void rewriteSettings();
     void clearLayout(QLayout *layout);
     void resize(QRect screenGeometry);
-    void setVisible(bool visible) override;
     void show();
 
 protected:
@@ -64,12 +63,16 @@ public Q_SLOTS:
     void showContextMenu(const QPoint &pos);
     void removeApplication();
     void showFileSelect();
+    void toggleShow();
+    void trayIconClicked(QSystemTrayIcon::ActivationReason activationReason);
 
 private:
     void createIconGroupBox();
     void createMessageGroupBox();
     void createActions();
     void createTrayIcon();
+
+    QString currentOS;
 
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;

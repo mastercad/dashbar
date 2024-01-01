@@ -9,6 +9,8 @@
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QCheckBox>
+#include <QTabWidget>
+#include <QWidget>
 
 class FileDialog: public QDialog
 {
@@ -18,6 +20,12 @@ class FileDialog: public QDialog
         FileDialog(Application* application, Applications* applications, QWidget* parent);
         QString convertToRelativePath(QString& path);
 
+    private:
+        QTabWidget* createFileTabWidget();
+        QWidget* createLinuxFileDialogTab();
+        QWidget* createWindowsFileDialogTab();
+        QWidget* createMacOSFileDialogTab();
+
     public Q_SLOTS:
         void onSelectFileClicked();
         void onSelectIconClicked();
@@ -25,13 +33,26 @@ class FileDialog: public QDialog
         void onSaveClicked();
 
     private:
-        QLineEdit* nameEdit;
-        QLineEdit* fileEdit;
         QLineEdit* iconEdit;
-        QLineEdit* commandEdit;
-        QLineEdit* paramsEdit;
-        QCheckBox* absolutePathCheckbox;
+        QLineEdit* nameEdit;
         QPushButton* iconButton;
+
+        QTabWidget *fileTabWidget;
+
+        QLineEdit* fileLinuxEdit;
+        QLineEdit* fileWindowsEdit;
+        QLineEdit* fileMacOSEdit;
+        QLineEdit* commandLinuxEdit;
+        QLineEdit* commandWindowsEdit;
+        QLineEdit* commandMacOSEdit;
+        QLineEdit* paramsLinuxEdit;
+        QLineEdit* paramsWindowsEdit;
+        QLineEdit* paramsMacOSEdit;
+        QCheckBox* absolutePathLinuxCheckbox;
+        QCheckBox* absolutePathWindowsCheckbox;
+        QCheckBox* absolutePathMacOSCheckbox;
+
+        QString currentOS;
 
         Application* application;
         Applications* applications;

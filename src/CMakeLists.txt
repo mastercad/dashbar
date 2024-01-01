@@ -10,6 +10,7 @@ qt_standard_project_setup()
 
 qt_add_executable(dashbar
     mainwindow.ui
+    osretriever.cpp
     application.cpp
     applicationRules.cpp
     applications.cpp

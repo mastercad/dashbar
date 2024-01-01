@@ -66,7 +66,7 @@ Application* Mapper::map(QSettings* applicationSettings, Application* applicatio
     }
 
     auto keys = application->getKeys();
-    QHashIterator<QString, ApplicationRules*> applicationRule(*keys);
+    QMapIterator<QString, ApplicationRules*> applicationRule(*keys);
     while (applicationRule.hasNext()) {
         applicationRule.next();
         if (true == applicationRule.value()->isIgnored()) {
@@ -106,24 +106,53 @@ QSettings* Mapper::map(Config* config, QSettings* settings) {
 QSettings* Mapper::map(Applications* applications, QSettings* settings) {
     settings->beginGroup("applications");
 
-    QHashIterator<QString, Application*> iterator(*applications->getData());
+    QMapIterator<QString, Application*> iterator(*applications->getData());
 
     while (iterator.hasNext()) {
         iterator.next();
         QString key = QString(retrieveApplicationName(iterator.value()));
+        if (!iterator.value()->get("name").isEmpty()
+            && !iterator.value()->get("name").startsWith(":")
+            ) {
+            settings->setValue(key+"/name", iterator.value()->get("name"));
+        }
 
-        settings->setValue(key+"/path", iterator.value()->get("path"));
-        if (!iterator.value()->get("command").isEmpty()) {
-            settings->setValue(key+"/command", iterator.value()->get("command"));
-        }
-        if (!iterator.value()->get("params").isEmpty()) {
-            settings->setValue(key+"/params", iterator.value()->get("params"));
-        }
         if (!iterator.value()->get("icon").isEmpty()
             && !iterator.value()->get("icon").startsWith(":")
-        ) {
+            ) {
             settings->setValue(key+"/icon", iterator.value()->get("icon"));
         }
+
+        if (!iterator.value()->get("linux-path").isEmpty()) {
+            settings->setValue(key+"/linux-path", iterator.value()->get("linux-path"));
+        }
+        if (!iterator.value()->get("windows-path").isEmpty()) {
+            settings->setValue(key+"/windows-path", iterator.value()->get("windows-path"));
+        }
+        if (!iterator.value()->get("mac-os-path").isEmpty()) {
+            settings->setValue(key+"/mac-os-path", iterator.value()->get("mac-os-path"));
+        }
+
+        if (!iterator.value()->get("linux-command").isEmpty()) {
+            settings->setValue(key+"/linux-command", iterator.value()->get("linux-command"));
+        }
+        if (!iterator.value()->get("windows-command").isEmpty()) {
+            settings->setValue(key+"/windows-command", iterator.value()->get("windows-command"));
+        }
+        if (!iterator.value()->get("mac-os-command").isEmpty()) {
+            settings->setValue(key+"/mac-os-command", iterator.value()->get("mac-os-command"));
+        }
+
+        if (!iterator.value()->get("linux-params").isEmpty()) {
+            settings->setValue(key+"/linux-params", iterator.value()->get("linux-params"));
+        }
+        if (!iterator.value()->get("windows-params").isEmpty()) {
+            settings->setValue(key+"/windows-params", iterator.value()->get("windows-params"));
+        }
+        if (!iterator.value()->get("mac-os-params").isEmpty()) {
+            settings->setValue(key+"/mac-os-params", iterator.value()->get("mac-os-params"));
+        }
+
     }
 
     settings->endGroup();
@@ -135,7 +164,20 @@ QString Mapper::retrieveApplicationName(const Application* application) {
         return application->getName();
     }
 
-    QFile file(application->getPath());
+    QString fileName;
+    if (!application->getLinuxPath().isEmpty()) {
+        fileName = application->getLinuxPath();
+    } else if (!application->getWindowsPath().isEmpty()) {
+        fileName = application->getWindowsPath();
+    } else if (!application->getMacOSPath().isEmpty()) {
+        fileName = application->getMacOSPath();
+    }
+
+    if (fileName.isEmpty()) {
+        return "";
+    }
+
+    QFile file(fileName);
     QFileInfo fileInfo(file.fileName());
 
     return fileInfo.baseName().trimmed();

@@ -3,11 +3,11 @@
 #include <QDebug>
 
 Applications::Applications() {
-    data = new QHash<QString, Application*>();    
+    data = new QMap<QString, Application*>();
 }
 
 Applications* Applications::add(Application* application) {
-    data->insert(application->getPath(), application);
+    data->insert(application->getName(), application);
     
     return this;
 }

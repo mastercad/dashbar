@@ -4,7 +4,7 @@
 #include "applications.h"
 
 #include <QObject>
-#include <QHash>
+#include <QMap>
 #include <QString>
 #include <QProcess>
 #include <QPushButton>
@@ -28,11 +28,12 @@ class ButtonManager: public QWidget
         QWidget* parent;
         Applications* applications;
         QHash<QString, QProcess*>* processes;
+        QString currentOS;
 
     // this member are only protected to make inheritance for testing possible
     protected:
         QSignalMapper* signalMapper;
-        QHash<QString, QPushButton*>* buttons;
+        QMap<QString, QPushButton*>* buttons;
 
 };
 

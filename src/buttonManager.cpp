@@ -10,14 +10,16 @@
 #include <QMenu>
 #include <QRect>
 #include <QSize>
+#include <QSysInfo>
 
 #include <QDebug>
 
 ButtonManager::ButtonManager(Applications* applications, QWidget* parent): parent(parent), applications(applications) {
     this->parent = parent;
     this->signalMapper = new QSignalMapper(parent);
-    this->buttons = new QHash<QString, QPushButton*>;
+    this->buttons = new QMap<QString, QPushButton*>;
     this->processes = new QHash<QString, QProcess*>;
+    this->currentOS = QSysInfo::kernelType();
     
     connect(signalMapper, &QSignalMapper::mappedString, this, &ButtonManager::startApplication);
 }
@@ -34,10 +36,10 @@ QPushButton* ButtonManager::generate(Application* application) {
     button->setContextMenuPolicy(Qt::CustomContextMenu);
 
     // prevent add "+" button also in this collection because this button behaves completely different
-    if (!application->getPath().isEmpty()) {
+    if (!application->retrievePath(currentOS).isEmpty()) {
         connect(button, SIGNAL(clicked()), this->signalMapper, SLOT(map()));
-        this->buttons->insert(application->getPath(), button);
-        this->signalMapper->setMapping(button, application->getPath());
+        this->buttons->insert(application->getName(), button);
+        this->signalMapper->setMapping(button, application->getName());
     }
 
     button->setMinimumSize(QSize(72, 72));
@@ -56,24 +58,20 @@ void ButtonManager::startApplication(QString applicationIdentifier) {
 
     QProcess* process = new QProcess(parent);
 
-    QString command = application->getCommand();
-    QString parameters = QString(application->getPath()).append(" ").append(application->getParameters());
+    QString command = application->retrieveCommand(currentOS);
+    QString parameters = application->retrieveParameters(currentOS);
 
-    if (command.isEmpty()) {
-        command = application->getPath();
-        parameters = application->getParameters();
-    }
-    process->setProperty("applicationIdentifier", application->getPath());
+    process->setProperty("applicationIdentifier", application->getName());
     process->start(command.trimmed(), parameters.split(" "));
 
     connect(process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processIsFinished(int,QProcess::ExitStatus)));
     connect(process, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(errorOccurred(QProcess::ProcessError)));
 
-    QPushButton* button = buttons->value(application->getPath());
+    QPushButton* button = buttons->value(application->getName());
 
     button->setDisabled(true);
 
-    processes->insert(application->getPath(), process);
+    processes->insert(application->getName(), process);
 }
 
 void ButtonManager::errorOccurred(QProcess::ProcessError error) {
@@ -97,7 +95,7 @@ void ButtonManager::errorOccurred(QProcess::ProcessError error) {
     }
 
     Application* application = applications->get(process->property("applicationIdentifier").toString());
-    QPushButton* button = buttons->value(application->getPath());
+    QPushButton* button = buttons->value(application->getName());
     button->setDisabled(false);
 }
 
@@ -107,7 +105,7 @@ void ButtonManager::processIsFinished(int exitCode, QProcess::ExitStatus exitSta
     qDebug() << "ExitCode: " << exitCode << " Exitstatus: " << exitStatus;
 
     Application* application = applications->get(process->property("applicationIdentifier").toString());
-    QPushButton* button = buttons->value(application->getPath());
+    QPushButton* button = buttons->value(application->getName());
     button->setDisabled(false);
 }
 

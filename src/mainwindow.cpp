@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "flowlayout.h"
+#include "osretriever.h"
 #include "fileDialog.h"
 #include "windowPositionManager.h"
 
@@ -31,6 +32,8 @@
 
 #include <QScreen>
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget* parent):
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -38,6 +41,8 @@ MainWindow::MainWindow(QWidget* parent):
     applications(new Applications()),
     windowPositionManager(new WindowPositionManager(this, applications))
 {
+    currentOS = OSRetriever::retrieve();
+
     ui->setupUi(this);
     setWindowModality(Qt::ApplicationModal);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -68,7 +73,7 @@ void MainWindow::createButtons() {
     mapper.map(settings, config);
     mapper.map(settings, applications);
 
-    QHashIterator<QString, Application*> iterator(*applications->getData());
+    QMapIterator<QString, Application*> iterator(*applications->getData());
 
     while (iterator.hasNext()) {
         iterator.next();
@@ -147,7 +152,7 @@ void MainWindow::removeApplication() {
     if (reply == QMessageBox::Yes) {
         Application* application = static_cast<Application*>(static_cast<QAction*>(this->sender())->data().value<Application*>());
 
-        this->applications->remove(application->getPath());
+        this->applications->remove(application->getName());
 
         rewriteSettings();
         createButtons();
@@ -165,13 +170,6 @@ void MainWindow::showFileSelect() {
     fileDialog.setModal(true);
 
     fileDialog.exec();
-}
-
-void MainWindow::setVisible(bool visible)
-{
-    minimizeAction->setEnabled(visible);
-    restoreAction->setEnabled(!visible);
-    QMainWindow::setVisible(visible);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -194,10 +192,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::createActions() {
     minimizeAction = new QAction(tr("Mi&nimize"), this);
-    connect(minimizeAction, &QAction::triggered, this, &QWidget::hide);
+//    connect(minimizeAction, &QAction::triggered, this, &QWidget::hide);
+    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(toggleShow()));
 
     restoreAction = new QAction(tr("&Restore"), this);
-    connect(restoreAction, &QAction::triggered, this, &QWidget::showNormal);
+//    connect(restoreAction, &QAction::triggered, this, &QWidget::showNormal);
+    connect(restoreAction, SIGNAL(triggered()), this, SLOT(toggleShow()));
 
     quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
@@ -211,8 +211,33 @@ void MainWindow::createTrayIcon() {
     trayIconMenu->addAction(quitAction);
 
     trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QPixmap(":/icons/default_icon.png"));
+    trayIcon->setIcon(QIcon(":/icons/application.ico"));
     trayIcon->setContextMenu(trayIconMenu);
+
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconClicked(QSystemTrayIcon::ActivationReason)));
+}
+
+void MainWindow::toggleShow()
+{
+    QMainWindow::setVisible(!isVisible());
+    minimizeAction->setEnabled(isVisible());
+    restoreAction->setEnabled(!isVisible());
+}
+
+void MainWindow::trayIconClicked(QSystemTrayIcon::ActivationReason activationReason)
+{
+    switch (activationReason)
+    {
+        case QSystemTrayIcon::DoubleClick:
+        case QSystemTrayIcon::Trigger:
+            this->toggleShow();
+            break;
+        case QSystemTrayIcon::Context:
+        case QSystemTrayIcon::MiddleClick:
+        default:
+            ;
+    }
 }
 
 MainWindow::~MainWindow() {

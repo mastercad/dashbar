@@ -16,6 +16,7 @@ HEADERS += ../src/application.h \
     ../src/flowlayout.h \
     ../src/mainwindow.h \
     ../src/mapper.h \
+    ../src/osretriever.h \
     ../src/windowPositionManager.h \
     tst_applications.h \
     tst_buttonManager.h \
@@ -30,6 +31,7 @@ SOURCES += ../src/application.cpp \
     ../src/flowlayout.cpp \
     ../src/mainwindow.cpp \
     ../src/mapper.cpp \
+    ../src/osretriever.cpp \
     ../src/windowPositionManager.cpp \
     tst_applications.cpp \
     tst_buttonManager.cpp \

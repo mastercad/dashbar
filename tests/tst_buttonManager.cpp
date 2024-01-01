@@ -11,7 +11,7 @@ class ButtonManagerMock: public ButtonManager
 {
 public:
     ButtonManagerMock(Applications* applications): ButtonManager(applications) {};
-    QHash<QString, QPushButton*>* getButtons() const { return buttons; };
+    QMap<QString, QPushButton*>* getButtons() const { return buttons; };
     QSignalMapper* getSignalMapper() const { return signalMapper; };
 };
 
@@ -31,7 +31,7 @@ void TestButtonManager::generate() {
     ButtonManagerMock* buttonManager = new ButtonManagerMock(applications);
 
     Application* application = new Application();
-    application->setPath(path)
+    application->setLinuxPath(path)
         ->setName(name)
         ->setIcon(iconPath);
 
@@ -41,14 +41,14 @@ void TestButtonManager::generate() {
     QCOMPARE(buttonManager->getButtons()->count(), expectedButtonCount);
 
     if (expectedButtonCount) {
-        QCOMPARE(buttonManager->getButtons()->find(application->getPath()).value(), button);
+        QCOMPARE(buttonManager->getButtons()->find(application->getLinuxPath()).value(), button);
     } else {
         QCOMPARE(buttonManager->getButtons()->isEmpty(), true);
     }
 }
 
 void TestButtonManager::generate_data() {
-    QTest::addColumn<QString>("path");
+    QTest::addColumn<QString>("linux-path");
     QTest::addColumn<QString>("name");
     QTest::addColumn<QString>("iconPath");
     QTest::addColumn<int>("expectedButtonCount");
@@ -62,7 +62,7 @@ Applications* TestButtonManager::generateFakeApplicationCollection(uint applicat
 
     for (uint current = 0; current < applicationCount; ++current) {
         Application* application = new Application();
-        application->setPath(&"/Fake/Path/"[current]);
+        application->setLinuxPath(&"/Fake/Path/"[current]);
         applications->add(application);
     }
 

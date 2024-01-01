@@ -4,6 +4,8 @@
 #include <QLocale>
 #include <QTranslator>
 #include <QMessageBox>
+#include <QIcon>
+
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])
@@ -15,6 +17,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName("ByteArtist");
     app.setOrganizationDomain("byte-artist.de");
     app.setApplicationName("Dashboard");
+    app.setWindowIcon(QIcon(":/icons/application.ico"));
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
