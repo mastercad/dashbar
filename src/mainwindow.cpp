@@ -192,11 +192,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::createActions() {
     minimizeAction = new QAction(tr("Mi&nimize"), this);
-//    connect(minimizeAction, &QAction::triggered, this, &QWidget::hide);
+    minimizeAction->setEnabled(false);
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(toggleShow()));
 
     restoreAction = new QAction(tr("&Restore"), this);
-//    connect(restoreAction, &QAction::triggered, this, &QWidget::showNormal);
     connect(restoreAction, SIGNAL(triggered()), this, SLOT(toggleShow()));
 
     quitAction = new QAction(tr("&Quit"), this);
@@ -214,15 +213,16 @@ void MainWindow::createTrayIcon() {
     trayIcon->setIcon(QIcon(":/icons/application.ico"));
     trayIcon->setContextMenu(trayIconMenu);
 
-    restoreAction = new QAction(tr("&Restore"), this);
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconClicked(QSystemTrayIcon::ActivationReason)));
 }
 
 void MainWindow::toggleShow()
 {
-    QMainWindow::setVisible(!isVisible());
-    minimizeAction->setEnabled(isVisible());
-    restoreAction->setEnabled(!isVisible());
+    bool visible = isVisible();
+    QMainWindow::setVisible(!visible);
+
+    minimizeAction->setEnabled(!visible);
+    restoreAction->setEnabled(visible);
 }
 
 void MainWindow::trayIconClicked(QSystemTrayIcon::ActivationReason activationReason)
