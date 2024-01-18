@@ -56,6 +56,21 @@ Application* Application::setIcon(const QString icon) {
     return this;
 }
 
+QString Application::retrievePath(const QString kernelType) const
+{
+    return this->get(kernelType + "-path");
+}
+
+QString Application::retrieveParameters(const QString kernelType) const
+{
+    return this->get(kernelType + "-params");
+}
+
+QString Application::retrieveCommand(const QString kernelType) const
+{
+    return this->get(kernelType + "-command");
+}
+
 QString Application::getLinuxPath() const {
     return this->get("linux-path");
 }
@@ -84,11 +99,6 @@ Application* Application::setMacOSPath(const QString path) {
     this->set("mac-os-path", path);
 
     return this;
-}
-
-QString Application::retrievePath(const QString kernelType) const
-{
-    return this->get(kernelType + "-path");
 }
 
 QString Application::getLinuxCommand() const {
@@ -121,11 +131,6 @@ Application* Application::setMacOSCommand(const QString command) {
     return this;
 }
 
-QString Application::retrieveCommand(const QString kernelType) const
-{
-    return this->get(kernelType + "-command");
-}
-
 QString Application::getLinuxParameters() const {
     return this->get("linux-params");
 }
@@ -154,11 +159,6 @@ Application* Application::setMacOSParameters(const QString parameters) {
     this->set("mac-os-params", parameters);
 
     return this;
-}
-
-QString Application::retrieveParameters(const QString kernelType) const
-{
-    return this->get(kernelType + "-parameters");
 }
 
 

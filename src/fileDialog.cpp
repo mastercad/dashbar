@@ -56,11 +56,11 @@ FileDialog::FileDialog(Application* application, Applications* applications, QWi
 
     fileTabWidget = this->createFileTabWidget();
 
-    if (currentOS.compare("linux")) {
+    if ("linux" == currentOS) {
         fileTabWidget->setCurrentIndex(0);
-    } else if (currentOS.compare("windows")) {
+    } else if ("windows" == currentOS) {
         fileTabWidget->setCurrentIndex(1);
-    } else if (currentOS.compare("mac-os")) {
+    } else if ("mac-os" == currentOS) {
         fileTabWidget->setCurrentIndex(2);
     }
 

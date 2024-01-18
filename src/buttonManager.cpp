@@ -1,5 +1,6 @@
 #include "buttonManager.h"
 #include "application.h"
+#include "osretriever.h"
 
 #include <QSignalMapper>
 #include <QHashIterator>
@@ -10,7 +11,6 @@
 #include <QMenu>
 #include <QRect>
 #include <QSize>
-#include <QSysInfo>
 
 #include <QDebug>
 
@@ -19,7 +19,7 @@ ButtonManager::ButtonManager(Applications* applications, QWidget* parent): paren
     this->signalMapper = new QSignalMapper(parent);
     this->buttons = new QMap<QString, QPushButton*>;
     this->processes = new QHash<QString, QProcess*>;
-    this->currentOS = QSysInfo::kernelType();
+    this->currentOS = OSRetriever::retrieve();
     
     connect(signalMapper, &QSignalMapper::mappedString, this, &ButtonManager::startApplication);
 }
@@ -58,8 +58,12 @@ void ButtonManager::startApplication(QString applicationIdentifier) {
 
     QProcess* process = new QProcess(parent);
 
-    QString command = application->retrieveCommand(currentOS);
+    QString command = application->retrievePath(currentOS) + " " + application->retrieveCommand(currentOS).trimmed();
     QString parameters = application->retrieveParameters(currentOS);
+
+    qDebug() << "CURRENT OS: " << currentOS;
+    qDebug() << "COMMAND: " << command;
+    qDebug() << "PARAMETERS: " << parameters;
 
     process->setProperty("applicationIdentifier", application->getName());
     process->start(command.trimmed(), parameters.split(" "));

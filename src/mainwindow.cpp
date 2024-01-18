@@ -43,6 +43,19 @@ MainWindow::MainWindow(QWidget* parent):
 {
     currentOS = OSRetriever::retrieve();
 
+    if (currentOS.isEmpty()) {
+        QMessageBox msgBox(
+            QMessageBox::Information,
+            tr("Unknown Operational System"),
+            tr("Operation System detection failure. Close Application."),
+            QMessageBox::Ok
+        );
+
+        QObject::connect(msgBox.button(QMessageBox::Ok), &QPushButton::clicked, qApp, &QCoreApplication::quit, Qt::QueuedConnection);
+
+        msgBox.exec();
+    }
+
     ui->setupUi(this);
     setWindowModality(Qt::ApplicationModal);
     setWindowFlags(Qt::FramelessWindowHint);

@@ -12,17 +12,17 @@ QString OSRetriever::retrieve()
     qDebug() << "kernelType: " << kernelType;
     qDebug() << "Product Version: " << productVersion;
 
-    if (kernelType.compare("linux")) {
+    if ("linux" == kernelType) {
         qDebug() << "LINUX ERKANNT!";
         return "linux";
     }
 
-    if (productVersion.contains("windows")) {
+    if ("windows" == productVersion) {
         qDebug() << "WINDOWS ERKANNT!";
         return "windows";
     }
 
-    if (productVersion.contains("macOS")) {
+    if ("macOS" == productVersion) {
         qDebug() << "MAC OS ERKANNT!";
         return "mac-os";
     }
